@@ -9,6 +9,9 @@ spring.jpa.properties.javax.persistence.validation.mode=none
 server.port=8083
 
 queue.name.pedido-recebido=pedidoRecebido
+queue.name.pagamento-aprovado=pagamentoAprovado
+queue.name.pagamento-recusado=pagamentoRecusado
+
 spring.cloud.aws.region.static=${AWS_REGION}
 spring.cloud.aws.credentials.access-key=${AWS_ACCESS_KEY}
 spring.cloud.aws.credentials.secret-key=${AWS_SECRET_KEY}

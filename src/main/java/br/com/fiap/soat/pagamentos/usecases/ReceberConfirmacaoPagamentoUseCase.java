@@ -7,6 +7,7 @@ import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamen
 import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPag
         this.pagamentoGateway = pagamentoGateway;
     }
 
+    @Transactional
     public String execute(ComandoDeConfirmacaoDePagamento comandoDeConfirmacaoDePagamento) {
         String action = comandoDeConfirmacaoDePagamento.getAction();
         if (!action.equals("payment.created")) {
