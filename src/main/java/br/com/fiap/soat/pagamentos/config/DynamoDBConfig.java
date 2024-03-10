@@ -22,10 +22,10 @@ public class DynamoDBConfig {
     @Value("${aws.dynamodb.endpoint}")
     private String dynamoDbEndpoint;
 
-    @Value("${aws.accessKey}")
+    @Value("${aws.dynamodb.accessKey}")
     private String awsAccessKeyId;
 
-    @Value("${aws.secretKey}")
+    @Value("${aws.dynamodb.secretKey}")
     private String awsSecretAccessKey;
 
     public AWSCredentialsProvider amazonAWSCredentialsProvider() {
@@ -44,7 +44,8 @@ public class DynamoDBConfig {
             System.out.println("******** ABOUT TO CREATE DYNAMODBCLIENT *********");
             return AmazonDynamoDBClientBuilder.standard()
                     .withCredentials(amazonAWSCredentialsProvider())
-                    .withRegion(awsRegion).build();
+                    .withEndpointConfiguration(new AmazonDynamoDBClientBuilder.EndpointConfiguration(dynamoDbEndpoint, awsRegion))
+                    .build();
         } catch (Exception e) {
             System.out.println("ERROR CONNECTION TO DYNAMODB CLIENT: ");
             e.printStackTrace();  // Print the stack trace for better error diagnostics
