@@ -11,9 +11,9 @@ public class ConfirmacaoPagamentoRequest {
     private String date_created;
     private String user_id;
     private String api_version;
-    @Schema(name = "Ação a ser processada. Somente a confirmação de pagamento é aceita no momento", example = "payment.created")
+    @Schema(description = "Ação a ser processada. Somente a confirmação de pagamento é aceita no momento", example = "payment.created")
     private String action;
-    @Schema(name = "Id de pagamento registrado no checkout de pedido")
+    @Schema(description = "Id de pagamento registrado no checkout de pedido")
     private ConfirmacaoPagamentoDataRequest data;
 
     public ComandoDeConfirmacaoDePagamento toDomain() {

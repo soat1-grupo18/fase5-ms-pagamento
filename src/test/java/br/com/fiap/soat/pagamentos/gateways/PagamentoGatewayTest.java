@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -39,7 +40,8 @@ public class PagamentoGatewayTest {
 
     @Test
     void criarPagamento() {
-        Pagamento pagamento = new Pagamento("1", "Pedido123", new BigDecimal(30), Status.PENDENTE, "2024-01-27");
+        var clienteId = UUID.randomUUID().toString();
+        Pagamento pagamento = new Pagamento("1", "Pedido123", new BigDecimal(30), Status.PENDENTE, "2024-01-27", clienteId);
         PagamentoDynamoEntity mockedEntity = PagamentoDynamoEntity.fromDomain(pagamento);
 
         lenient().when(pagamentoRepository.save(any(PagamentoDynamoEntity.class))).thenReturn(mockedEntity);
@@ -51,6 +53,7 @@ public class PagamentoGatewayTest {
         assertEquals(pagamento.getPedidoId(), createdPagamento.getPedidoId());
         assertEquals(pagamento.getStatus(), createdPagamento.getStatus());
         assertEquals(pagamento.getDataDeCriacao(), createdPagamento.getDataDeCriacao());
+        assertEquals(pagamento.getClienteId(), createdPagamento.getClienteId());
     }
 
     @Test
@@ -67,7 +70,8 @@ public class PagamentoGatewayTest {
     @Test
     void obterPagamentosPorStatus_retornaSemPagamentos() {
         Status status = Status.RECUSADO;
-        Pagamento pagamento = new Pagamento("1", "Pedido123", new BigDecimal(30), status, "2024-01-27");
+        var clienteId = UUID.randomUUID().toString();
+        Pagamento pagamento = new Pagamento("1", "Pedido123", new BigDecimal(30), status, "2024-01-27", clienteId);
         PagamentoDynamoEntity mockedEntity = PagamentoMapper.toEntity(pagamento);
 
         List<PagamentoDynamoEntity> pagamentosList = Collections.singletonList(mockedEntity);

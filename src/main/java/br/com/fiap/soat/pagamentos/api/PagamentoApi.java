@@ -44,11 +44,8 @@ public class PagamentoApi {
         return ResponseEntity.ok(pagamentoController.obterPagamentoPorId(id));
     }
 
-    @Operation(summary = "Receber confirmaçào de pagamento (Webhook)",
-            description = "Webhook para receber a confirmação de pagamento enviada pelo MercadoPago.<br>" +
-                    "Somente os parâmetros action e data.id serão processados.<br>" +
-                    "- action: Ação a ser processada. Somente a confirmação de pagamento é aceita no momento. Exemplo: payment.created<br>" +
-                    "- data.id: O id de pagamento registrado no checkout de pedido.")
+    @Operation(summary = "Receber confirmação de pagamento (Webhook)",
+            description = "Webhook para receber a confirmação de pagamento enviada pelo MercadoPago. Informar somente campos action (payment.created, payment.denied) e data.id (id do pagamento)")
     @PostMapping("/pagamentos/confirmar")
     public ResponseEntity<String> receberConfirmacao(@RequestBody ConfirmacaoPagamentoRequest confirmacaoPagamentoRequest) {
         return ResponseEntity.ok(pagamentoController.receberConfirmacaoPagamento(confirmacaoPagamentoRequest.toDomain()));

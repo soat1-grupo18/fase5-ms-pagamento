@@ -38,7 +38,8 @@ public class ObterPagamentoPorIdUseCaseTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                String.valueOf(LocalDateTime.now())
+                String.valueOf(LocalDateTime.now()),
+                "ClienteId123"
         );
 
         when(pagamentoGateway.criarPagamento(eq(pagamento))).thenReturn(pagamento);

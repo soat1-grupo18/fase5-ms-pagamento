@@ -36,7 +36,7 @@ class ReceberConfirmacaoPagamentoUseCaseTest {
     void execute() {
         var pagamentoId = UUID.randomUUID().toString();
         var comando = new ComandoDeConfirmacaoDePagamento("payment.created", pagamentoId);
-        var pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString());
+        var pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString(), UUID.randomUUID().toString());
         when(pagamentoGateway.obterPagamentoPorId(pagamentoId)).thenReturn(Optional.of(pagamento));
         var result = receberConfirmacaoPagamentoUseCase.execute(comando);
         assertEquals(result, String.format("Pagamento %s confirmado", pagamentoId));

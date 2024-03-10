@@ -5,7 +5,7 @@ import br.com.fiap.soat.pagamentos.entities.Pagamento;
 
 public class PagamentoMapper {
     public static Pagamento toDomain(PagamentoDynamoEntity entity) {
-        return new Pagamento(entity.getId(), entity.getPedidoId(), entity.getTotal(), entity.getStatus(), entity.getDataDeCriacao());
+        return new Pagamento(entity.getId(), entity.getPedidoId(), entity.getTotal(), entity.getStatus(), entity.getDataDeCriacao(), entity.getClienteId());
     }
 
     public static PagamentoDynamoEntity toEntity(Pagamento pagamento) {
@@ -16,6 +16,7 @@ public class PagamentoMapper {
         pagamentoDynamoEntity.setTotal(pagamento.getTotal());
         pagamentoDynamoEntity.setStatus(pagamento.getStatus());
         pagamentoDynamoEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
+        pagamentoDynamoEntity.setClienteId(pagamento.getClienteId());
 
         return pagamentoDynamoEntity;
     }

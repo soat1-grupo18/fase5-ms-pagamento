@@ -17,13 +17,16 @@ public class PagamentoRequest {
     @NotNull(message = "O campo total é obrigatório.")
     private BigDecimal total;
 
+    @NotNull(message = "O campo clienteId é obrigatório.")
+    private String clienteId;
+
     Instant currentInstant = Instant.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
     String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
     public Pagamento toDomain() {
 
-        Pagamento pagamento = new Pagamento(pedidoId, total, Status.PENDENTE, dataDeCriacao);
+        Pagamento pagamento = new Pagamento(null, pedidoId, total, Status.PENDENTE, dataDeCriacao, clienteId);
         System.out.print("*************************************");
         System.out.println(pagamento);
         System.out.print("*************************************");
@@ -38,10 +41,18 @@ public class PagamentoRequest {
         return total;
     }
 
+    public String getClienteId() {
+        return clienteId;
+    }
+
     public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
 }
