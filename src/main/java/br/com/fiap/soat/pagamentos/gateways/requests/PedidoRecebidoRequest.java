@@ -38,10 +38,12 @@ public class PedidoRecebidoRequest {
         String dataDeCriacao = formatter.format(currentInstant.atOffset(ZoneOffset.UTC));
 
         return new Pagamento(
+                null,
                 pedidoId.toString(),
                 preco,
                 Status.PENDENTE,
-                dataDeCriacao
+                dataDeCriacao,
+                clienteId.toString()
         );
     }
 }

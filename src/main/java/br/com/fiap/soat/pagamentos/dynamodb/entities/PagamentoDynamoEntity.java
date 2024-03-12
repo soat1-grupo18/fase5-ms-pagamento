@@ -31,6 +31,9 @@ public class PagamentoDynamoEntity {
     @DynamoDBAttribute(attributeName = "dataDeCriacao")
     private String dataDeCriacao;
 
+    @DynamoDBAttribute(attributeName = "clienteId")
+    private String clienteId;
+
     @DynamoDbPartitionKey
     @DynamoDbAttribute("id")
     public String getId() {
@@ -77,6 +80,15 @@ public class PagamentoDynamoEntity {
         this.dataDeCriacao = dataDeCriacao;
     }
 
+    @DynamoDbAttribute("pedidoId")
+    public String getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
+    }
+
     public static PagamentoDynamoEntity fromDomain(Pagamento pagamento) {
         PagamentoDynamoEntity dynamoEntity = new PagamentoDynamoEntity();
 
@@ -85,6 +97,7 @@ public class PagamentoDynamoEntity {
         dynamoEntity.setTotal(pagamento.getTotal());
         dynamoEntity.setStatus(pagamento.getStatus());
         dynamoEntity.setDataDeCriacao(pagamento.getDataDeCriacao());
+        dynamoEntity.setClienteId(pagamento.getClienteId());
 
         return dynamoEntity;
     }
@@ -95,7 +108,8 @@ public class PagamentoDynamoEntity {
                 pedidoId,
                 total,
                 status,
-                dataDeCriacao
+                dataDeCriacao,
+                clienteId
         );
     }
 

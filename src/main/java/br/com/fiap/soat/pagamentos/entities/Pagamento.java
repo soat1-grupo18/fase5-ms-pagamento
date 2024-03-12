@@ -9,6 +9,8 @@ public class Pagamento {
     private Status status;
     private String dataDeCriacao;
 
+    private String clienteId;
+
 
     public Status buscarStatus() {
         return status;
@@ -23,25 +25,15 @@ public class Pagamento {
             String pedidoId,
             BigDecimal total,
             Status status,
-            String dataDeCriacao
+            String dataDeCriacao,
+            String clienteId
     ) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.total = total;
         this.status = status;
         this.dataDeCriacao = dataDeCriacao;
-    }
-
-    public Pagamento(
-            String pedidoId,
-            BigDecimal total,
-            Status status,
-            String dataDeCriacao
-    ) {
-        this.pedidoId = pedidoId;
-        this.total = total;
-        this.status = status;
-        this.dataDeCriacao = dataDeCriacao;
+        this.clienteId = clienteId;
     }
 
     public void setId(String id) {
@@ -84,13 +76,22 @@ public class Pagamento {
         this.dataDeCriacao = dataDeCriacao;
     }
 
+    public String getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
+    }
+
     public Pagamento toDomain() {
         return new Pagamento(
                 id,
                 pedidoId,
                 total,
                 status,
-                dataDeCriacao
+                dataDeCriacao,
+                clienteId
         );
     }
 }

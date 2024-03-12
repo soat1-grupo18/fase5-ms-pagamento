@@ -15,6 +15,7 @@ import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 public class CriarPagamentoUseCaseTest {
@@ -29,7 +30,8 @@ public class CriarPagamentoUseCaseTest {
 
     @Test
     void execute() {
-        var pagamento = new Pagamento("Pedido123", new BigDecimal(70.50), Status.APROVADO, String.valueOf(LocalDateTime.now()));
+        String clienteId = UUID.randomUUID().toString();
+        var pagamento = new Pagamento(null, "Pedido123", new BigDecimal("70.50"), Status.APROVADO, String.valueOf(LocalDateTime.now()), clienteId);
         ArgumentCaptor<Pagamento> pagamentoCaptor = ArgumentCaptor.forClass(Pagamento.class);
 
         when(pagamentoGateway.criarPagamento(pagamentoCaptor.capture())).thenReturn(pagamento);
@@ -43,7 +45,7 @@ public class CriarPagamentoUseCaseTest {
         assertNotNull(capturedPagamento.getPedidoId());
 
         assertEquals(Status.APROVADO, capturedPagamento.getStatus());
-        assertEquals(new BigDecimal(70.50), capturedPagamento.getTotal());
+        assertEquals(new BigDecimal("70.50"), capturedPagamento.getTotal());
         assertEquals(pagamento, novoPagamento);
     }
 }

@@ -25,13 +25,7 @@ public class PagamentoGateway implements PagamentosGatewayPort {
     @Override
     public Pagamento criarPagamento(Pagamento pagamento) {
         PagamentoDynamoEntity pagamentoDynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
-
-        try {
-            pagamentoRepository.save(pagamentoDynamoEntity);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
+        pagamentoRepository.save(pagamentoDynamoEntity);
         return pagamentoDynamoEntity.toDomain();
     }
 
@@ -57,6 +51,12 @@ public class PagamentoGateway implements PagamentosGatewayPort {
 
 
         return pagamentos;
+    }
+
+    public Pagamento confirmarPagamento(Pagamento pagamento) {
+        PagamentoDynamoEntity pagamentoDynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
+        pagamentoRepository.save(pagamentoDynamoEntity);
+        return pagamentoDynamoEntity.toDomain();
     }
 
 }

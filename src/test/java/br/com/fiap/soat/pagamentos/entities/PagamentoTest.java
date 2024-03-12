@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,12 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PagamentoTest {
     @Test
     void toDomain() {
+        var clienteId = UUID.randomUUID().toString();
         Pagamento pagamento = new Pagamento(
                 "1",
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2024-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z",
+                clienteId
         );
 
         Pagamento result = pagamento.toDomain();
@@ -27,6 +30,7 @@ public class PagamentoTest {
         assertEquals(new BigDecimal("70.50"), result.getTotal());
         assertEquals(Status.APROVADO, result.getStatus());
         assertEquals("2024-01-28T10:30:00Z", result.getDataDeCriacao());
+        assertEquals(clienteId, result.getClienteId());
     }
 
     @Test
@@ -36,7 +40,8 @@ public class PagamentoTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2024-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z",
+                UUID.randomUUID().toString()
         );
 
         Status result = pagamento.buscarStatus();
@@ -50,7 +55,8 @@ public class PagamentoTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2024-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z",
+                UUID.randomUUID().toString()
         );
 
         String result = pagamento.buscarPedidoId();

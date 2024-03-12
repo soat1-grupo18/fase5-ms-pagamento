@@ -21,7 +21,7 @@ public class ConfirmacaoDePagamentoInvalidaExceptionTest {
         String action = "TestAction";
         ConfirmacaoDePagamentoInvalidaException exception = ConfirmacaoDePagamentoInvalidaException.aPartirDaAction(action);
 
-        String expectedMessage = String.format("Action %s não suportada para confirmação de pagamento.", action);
+        String expectedMessage = String.format("Action %s não suportada para confirmação de pagamento. Valores esperados: payment.created, payment.denied", action);
         assertEquals(expectedMessage, exception.getMessage());
     }
 

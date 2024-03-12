@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -60,6 +61,6 @@ public class GetPagamentosByStatusSteps {
     }
 
     private Pagamento criarPagamento( ) {
-        return new Pagamento("PedidoTeste123", new BigDecimal(70.50), Status.PENDENTE, String.valueOf(LocalDateTime.now()));
+        return new Pagamento(null, "PedidoTeste123", new BigDecimal("70.50"), Status.PENDENTE, String.valueOf(LocalDateTime.now()), UUID.randomUUID().toString());
     }
 }

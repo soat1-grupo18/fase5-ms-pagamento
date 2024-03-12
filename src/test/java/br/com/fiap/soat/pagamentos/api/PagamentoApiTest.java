@@ -51,12 +51,14 @@ class PagamentoApiTest {
     void criarPagamento() throws Exception {
         String pedidoId = UUID.randomUUID().toString();
         BigDecimal total = BigDecimal.valueOf(15);
+        String clienteId = UUID.randomUUID().toString();
 
         var request = new PagamentoRequest();
         request.setPedidoId(pedidoId);
         request.setTotal(total);
+        request.setClienteId(clienteId);
 
-        var pagamento = new Pagamento(pedidoId, total, Status.PENDENTE, LocalDateTime.now().toString());
+        var pagamento = new Pagamento(null, pedidoId, total, Status.PENDENTE, LocalDateTime.now().toString(), clienteId);
 
         when(pagamentoController.criarPagamento(any()))
                 .thenAnswer(i -> PagamentoPresenter.fromDomain(pagamento));
@@ -73,7 +75,7 @@ class PagamentoApiTest {
     void obterPagamentos() throws Exception {
 
         var pagamentoId = UUID.randomUUID().toString();
-        Pagamento pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString());
+        Pagamento pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString(), UUID.randomUUID().toString());
         List<PagamentoPresenter> pagamentos = new ArrayList<>();
         pagamentos.add(PagamentoPresenter.fromDomain(pagamento));
 
@@ -89,7 +91,7 @@ class PagamentoApiTest {
     @Test
     void obterPagamentoPorId() throws Exception {
         var pagamentoId = UUID.randomUUID().toString();
-        Pagamento pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString());
+        Pagamento pagamento = new Pagamento(pagamentoId, UUID.randomUUID().toString(), BigDecimal.valueOf(15), Status.PENDENTE, LocalDateTime.now().toString(), UUID.randomUUID().toString());
 
         when(pagamentoController.obterPagamentoPorId(pagamentoId))
                 .thenReturn(PagamentoPresenter.fromDomain(pagamento));

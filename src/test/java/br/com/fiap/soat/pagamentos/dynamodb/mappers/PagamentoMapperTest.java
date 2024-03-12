@@ -9,6 +9,7 @@ import br.com.fiap.soat.pagamentos.entities.Status;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,12 +35,14 @@ public class PagamentoMapperTest {
 
     @Test
     void toEntity() {
+        var clienteId = UUID.randomUUID().toString();
         Pagamento pagamento = new Pagamento(
                 "1",
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2024-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z",
+                clienteId
         );
 
         PagamentoDynamoEntity entity = PagamentoMapper.toEntity(pagamento);
@@ -49,5 +52,6 @@ public class PagamentoMapperTest {
         assertEquals(new BigDecimal("70.50"), entity.getTotal());
         assertEquals(Status.APROVADO, entity.getStatus());
         assertEquals("2024-01-28T10:30:00Z", entity.getDataDeCriacao());
+        assertEquals(clienteId, entity.getClienteId());
     }
 }

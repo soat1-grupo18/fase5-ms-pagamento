@@ -5,6 +5,7 @@ import br.com.fiap.soat.pagamentos.entities.Status;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,12 +16,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class PagamentoDynamoEntityTest {
     @Test
     void fromDomain() {
+        String clienteId = UUID.randomUUID().toString();
         Pagamento pagamento = new Pagamento(
                 "1",
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                "2024-01-28T10:30:00Z"
+                "2024-01-28T10:30:00Z",
+                clienteId
         );
 
         PagamentoDynamoEntity dynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
@@ -30,6 +33,7 @@ public class PagamentoDynamoEntityTest {
         assertEquals(new BigDecimal("70.50"), dynamoEntity.getTotal());
         assertEquals(Status.APROVADO, dynamoEntity.getStatus());
         assertEquals("2024-01-28T10:30:00Z", dynamoEntity.getDataDeCriacao());
+        assertEquals(clienteId, dynamoEntity.getClienteId());
     }
 
     @Test

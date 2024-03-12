@@ -39,7 +39,8 @@ public class ObterPagamentosPorStatusUseCaseTest {
                 "Pedido123",
                 new BigDecimal("70.50"),
                 Status.APROVADO,
-                String.valueOf(LocalDateTime.now())
+                String.valueOf(LocalDateTime.now()),
+                "ClienteId123"
         );
 
 
