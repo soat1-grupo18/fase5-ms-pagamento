@@ -2,6 +2,7 @@ package br.com.fiap.soat.pagamentos.usecases;
 
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
+import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentoConfirmadoQueueOutGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,11 +26,14 @@ class ReceberConfirmacaoPagamentoUseCaseTest {
     @Mock
     private PagamentosGatewayPort pagamentoGateway;
 
+    @Mock
+    private PagamentoConfirmadoQueueOutGatewayPort pagamentoConfirmadoQueueOutGateway;
+
     private ReceberConfirmacaoPagamentoUseCase receberConfirmacaoPagamentoUseCase;
 
     @BeforeEach
     void initUseCase() {
-        receberConfirmacaoPagamentoUseCase = new ReceberConfirmacaoPagamentoUseCase(pagamentoGateway);
+        receberConfirmacaoPagamentoUseCase = new ReceberConfirmacaoPagamentoUseCase(pagamentoGateway, pagamentoConfirmadoQueueOutGateway);
     }
 
     @Test

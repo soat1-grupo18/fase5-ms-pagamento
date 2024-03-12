@@ -6,6 +6,6 @@ public class ConfirmacaoDePagamentoInvalidaException extends RuntimeException {
     }
 
     public static ConfirmacaoDePagamentoInvalidaException aPartirDaAction(String action) {
-        return new ConfirmacaoDePagamentoInvalidaException(String.format("Action %s não suportada para confirmação de pagamento.", action));
+        return new ConfirmacaoDePagamentoInvalidaException(String.format("Action %s não suportada para confirmação de pagamento. Valores esperados: payment.created, payment.denied", action));
     }
 }

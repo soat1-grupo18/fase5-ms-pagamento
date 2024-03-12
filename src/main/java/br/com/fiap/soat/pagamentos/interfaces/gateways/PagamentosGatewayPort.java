@@ -10,4 +10,5 @@ public interface PagamentosGatewayPort {
     List<Pagamento> obterPagamentosPorStatus(Status status);
     Pagamento criarPagamento(Pagamento pedido);
     Optional<Pagamento> obterPagamentoPorId(String id);
+    Pagamento confirmarPagamento(Pagamento pagamento);
 }

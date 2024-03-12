@@ -53,4 +53,10 @@ public class PagamentoGateway implements PagamentosGatewayPort {
         return pagamentos;
     }
 
+    public Pagamento confirmarPagamento(Pagamento pagamento) {
+        PagamentoDynamoEntity pagamentoDynamoEntity = PagamentoDynamoEntity.fromDomain(pagamento);
+        pagamentoRepository.save(pagamentoDynamoEntity);
+        return pagamentoDynamoEntity.toDomain();
+    }
+
 }
