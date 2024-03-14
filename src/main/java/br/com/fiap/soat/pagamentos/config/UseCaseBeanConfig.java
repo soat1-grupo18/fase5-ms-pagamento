@@ -1,5 +1,5 @@
 package br.com.fiap.soat.pagamentos.config;
-import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentoConfirmadoQueueOutGatewayPort;
+import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentoConfirmadoNotificationGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.*;
 import br.com.fiap.soat.pagamentos.usecases.*;
@@ -20,8 +20,8 @@ public class UseCaseBeanConfig {
 
     @Bean("receberConfirmacaoPagamentoUseCasePort")
     public ReceberConfirmacaoPagamentoUseCasePort ReceberConfirmacaoPagamentoUseCasePort(PagamentosGatewayPort pagamentoGatewayPort,
-                                                                                         PagamentoConfirmadoQueueOutGatewayPort pagamentoConfirmadoQueueOutGatewayPort) {
-        return new ReceberConfirmacaoPagamentoUseCase(pagamentoGatewayPort, pagamentoConfirmadoQueueOutGatewayPort);
+                                                                                         PagamentoConfirmadoNotificationGatewayPort pagamentoConfirmadoNotificationGatewayPort) {
+        return new ReceberConfirmacaoPagamentoUseCase(pagamentoGatewayPort, pagamentoConfirmadoNotificationGatewayPort);
     }
 
     @Bean("obterPagamentosPorStatusUseCasePort")
