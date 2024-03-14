@@ -3,9 +3,8 @@ package br.com.fiap.soat.pagamentos.usecases;
 import br.com.fiap.soat.pagamentos.entities.Pagamento;
 import br.com.fiap.soat.pagamentos.entities.Status;
 import br.com.fiap.soat.pagamentos.exceptions.ConfirmacaoDePagamentoInvalidaException;
-import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentoConfirmadoQueueOutGatewayPort;
+import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentoConfirmadoNotificationGatewayPort;
 import br.com.fiap.soat.pagamentos.interfaces.usecases.ReceberConfirmacaoPagamentoUseCasePort;
-import br.com.fiap.soat.pagamentos.dynamodb.entities.PagamentoDynamoEntity;
 import br.com.fiap.soat.pagamentos.interfaces.gateways.PagamentosGatewayPort;
 import br.com.fiap.soat.pagamentos.usecases.model.ComandoDeConfirmacaoDePagamento;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +15,10 @@ import java.util.Optional;
 
 public class ReceberConfirmacaoPagamentoUseCase implements ReceberConfirmacaoPagamentoUseCasePort {
     private final PagamentosGatewayPort pagamentoGateway;
-    private final PagamentoConfirmadoQueueOutGatewayPort pagamentoConfirmadoQueueOutGateway;
+    private final PagamentoConfirmadoNotificationGatewayPort pagamentoConfirmadoQueueOutGateway;
 
     public ReceberConfirmacaoPagamentoUseCase(PagamentosGatewayPort pagamentoGateway,
-                                              PagamentoConfirmadoQueueOutGatewayPort pagamentoConfirmadoQueueOutGateway) {
+                                              PagamentoConfirmadoNotificationGatewayPort pagamentoConfirmadoQueueOutGateway) {
         this.pagamentoGateway = pagamentoGateway;
         this.pagamentoConfirmadoQueueOutGateway = pagamentoConfirmadoQueueOutGateway;
     }
