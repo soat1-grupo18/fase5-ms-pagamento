@@ -17,9 +17,14 @@ services:
       - AWS_SECRET_KEY="$${{ secrets.AWS_SECRET_KEY }}"
       - AWS_DYNAMODB_ENDPOINT="$${{ secrets.AWS_DYNAMODB_ENDPOINT }}"
 
-  db:
-    image: public.ecr.aws/aws-dynamodb-local/aws-dynamodb-local:latest
-    restart: always
-    container_name: pagamento_dbhost
+  localstack:
+    image: localstack/localstack
     ports:
-      - "5435:5432"
+      - "127.0.0.1:4566:4566"
+    environment:
+      - SERVICES=dynamodb
+      - LOCALSTACK_HOST=localstack:4566
+      - DEBUG=${DEBUG:-0}
+    volumes:
+      - "./localstack:/etc/localstack/init/ready.d:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
