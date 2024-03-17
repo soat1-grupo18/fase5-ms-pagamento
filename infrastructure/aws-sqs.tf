@@ -27,12 +27,12 @@ resource "aws_sqs_queue" "ms_pagamento_evento_pedido_recebido_dlq" {
   policy = data.aws_iam_policy_document.sqs_policy.json
 }
 
-resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
-  topic_arn = data.aws_sns_topic.ms_pedido.arn
-  protocol  = "sqs"
-  endpoint  = aws_sqs_queue.ms_pagamento_evento_pedido_recebido.arn
+resource "aws_sns_topic_subscription" "ms_pagamento_evento_pedido_recebido" {
+  topic_arn            = data.aws_sns_topic.ms_pedido.arn
+  protocol             = "sqs"
+  endpoint             = aws_sqs_queue.ms_pagamento_evento_pedido_recebido.arn
+  raw_message_delivery = true
 }
-
 
 data "aws_iam_policy_document" "sqs_policy" {
   statement {
@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "sqs_policy" {
     ]
 
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "AWS:SourceOwner"
       values = [
         data.aws_caller_identity.current.account_id
