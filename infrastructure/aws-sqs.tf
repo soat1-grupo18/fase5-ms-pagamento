@@ -39,9 +39,9 @@ data "aws_iam_policy_document" "sqs_policy" {
     effect = "Allow"
 
     principals {
-      type = "AWS"
+      type = "Service"
       identifiers = [
-        data.aws_caller_identity.current.account_id
+        "sns.amazonaws.com"
       ]
     }
 
@@ -52,5 +52,13 @@ data "aws_iam_policy_document" "sqs_policy" {
     resources = [
       "*"
     ]
+
+    condition {
+      test = "StringEquals"
+      variable = "AWS:SourceOwner"
+      values = [
+        data.aws_caller_identity.current.account_id
+      ]
+    }
   }
 }
