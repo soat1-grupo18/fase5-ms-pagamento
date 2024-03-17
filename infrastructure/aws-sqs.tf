@@ -35,6 +35,7 @@ resource "aws_sns_topic_subscription" "ms_pagamento_evento_pedido_recebido" {
 }
 
 data "aws_iam_policy_document" "sqs_policy" {
+  # docs: https://docs.aws.amazon.com/sns/latest/dg/subscribe-sqs-queue-to-sns-topic.html
   statement {
     effect = "Allow"
 
@@ -55,7 +56,7 @@ data "aws_iam_policy_document" "sqs_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "AWS:SourceOwner"
+      variable = "AWS:SourceAccount"
       values = [
         data.aws_caller_identity.current.account_id
       ]
