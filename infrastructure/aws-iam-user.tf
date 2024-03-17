@@ -16,6 +16,7 @@ data "aws_iam_policy_document" "ms_pagamento" {
       "dynamodb:GetItem",
       "dynamodb:PutItem",
       "dynamodb:Query",
+      "dynamodb:Scan", # Bad design. Scan is slow and lead to high costs.
       "dynamodb:UpdateItem",
     ]
     resources = [
