@@ -19,8 +19,8 @@ jobs:
     secrets: inherit
     
   infrastructure:
-    needs:
-      - java-quality
+    # needs:
+    #   - java-quality
     uses: soat1-grupo18/fase5-reusable-github-workflows/.github/workflows/aws-terraform.yml@main
     with:
       aws-region: us-east-1
