@@ -58,5 +58,7 @@ spec:
             configMapKeyRef:
               name: application-config
               key: aws_sns_endpoint
+        - name: SPRING_DATA_DYNAMODB_ENTITY2DDL_AUTO
+          value: none
         ports:
         - containerPort: 8080
