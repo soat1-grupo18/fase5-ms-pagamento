@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ms-pagamento
-        image: pabloldias/soat1-grupo18-ms-pagamento:latest
+        image: olegon/soat1-grupo18-ms-pagamento:latest
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -29,9 +29,10 @@ spec:
         - name: SERVER_PORT
           value: "8080"
         - name: AWS_REGION
-          value: "us-east-1"
-        - name: AWS_DYNAMODB_ENDPOINT
-          value: "dynamodb.us-east-1.amazonaws.com"
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: aws_region
         - name: AWS_ACCESS_KEY
           valueFrom:
             secretKeyRef:
@@ -42,5 +43,20 @@ spec:
             secretKeyRef:
               name: aws-credentials
               key: aws_secret_key
+        - name: AWS_DYNAMODB_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: aws_dynamodb_endpoint
+        - name: AWS_SQS_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: aws_sqs_endpoint
+        - name: AWS_SNS_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: aws_sns_endpoint
         ports:
         - containerPort: 8080
