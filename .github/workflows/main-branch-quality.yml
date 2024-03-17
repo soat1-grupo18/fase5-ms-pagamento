@@ -15,5 +15,5 @@ jobs:
     with:
       java-distribution: corretto
       java-version: "17"
-      sonar-project-key: soat1-grupo18_fase4-ms-pagamento
+      sonar-project-key: soat1-grupo18_fase5-ms-pagamento
     secrets: inherit
