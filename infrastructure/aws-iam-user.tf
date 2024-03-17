@@ -1,4 +1,4 @@
-// Bad practive. It should be an IAM Role.
+// Bad practice. It should be an IAM Role.
 resource "aws_iam_user" "ms_pagamento" {
   name = "ms-pagamento"
   path = "/fiap-store/"
