@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDynamoDBRepositories(basePackages = "br.com.fiap.soat.pagamentos.dynamodb.repositories")
 public class PagamentosApplication {
 	public static void main(String[] args) {
-		try {
-			SpringApplication.run(PagamentosApplication.class, args);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		SpringApplication.run(PagamentosApplication.class, args);
 	}
 }
