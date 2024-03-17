@@ -58,5 +58,12 @@ spec:
             configMapKeyRef:
               name: application-config
               key: aws_sns_endpoint
+        - name: SPRING_DATA_DYNAMODB_ENTITY2DDL_AUTO
+          value: none
+        - name: TOPIC_PAGAMENTO
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: aws_sns_ms_pagamento_arn
         ports:
         - containerPort: 8080

@@ -40,16 +40,9 @@ public class DynamoDBConfig {
 
     @Bean(name = "amazonDynamoDB")
     public AmazonDynamoDB amazonDynamoDB() {
-        try {
-            System.out.println("******** ABOUT TO CREATE DYNAMODBCLIENT *********");
-            return AmazonDynamoDBClientBuilder.standard()
-                    .withCredentials(amazonAWSCredentialsProvider())
-                    .withEndpointConfiguration(new AmazonDynamoDBClientBuilder.EndpointConfiguration(dynamoDbEndpoint, awsRegion))
-                    .build();
-        } catch (Exception e) {
-            System.out.println("ERROR CONNECTION TO DYNAMODB CLIENT: ");
-            e.printStackTrace();  // Print the stack trace for better error diagnostics
-            throw e;
-        }
+        return AmazonDynamoDBClientBuilder.standard()
+            .withCredentials(amazonAWSCredentialsProvider())
+            .withEndpointConfiguration(new AmazonDynamoDBClientBuilder.EndpointConfiguration(dynamoDbEndpoint, awsRegion))
+            .build();
     }
 }
